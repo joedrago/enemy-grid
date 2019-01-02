@@ -724,7 +724,8 @@ local namePlateOnEvent = function (self, event, ...)
 			local auraIndex = 1
 			
 			for i = 1, #debuffs do
-				local name, texture, count, debuffType, duration, expirationTime, caster, canStealOrPurge, nameplateShowPersonal, spellId = UnitAura (self.NamePlateId, debuffs [i], nil, "HARMFUL|PLAYER")
+				spellName = GetSpellInfo(debuffs[i])
+				local name, texture, count, debuffType, duration, expirationTime, caster, canStealOrPurge, nameplateShowPersonal, spellId = AuraUtil.FindAuraByName(spellName, self.NamePlateId, "HARMFUL|PLAYER")
 				if (name) then
 					AddAura (self, auraIndex, auraWidth, auraHeight, name, texture, count, debuffType, duration, expirationTime, caster, canStealOrPurge, nameplateShowPersonal, spellId)
 					auraIndex = auraIndex + 1
@@ -735,7 +736,8 @@ local namePlateOnEvent = function (self, event, ...)
 			end
 			
 			for i = 1, #buffs do
-				local name, texture, count, debuffType, duration, expirationTime, caster, canStealOrPurge, nameplateShowPersonal, spellId = UnitAura (self.NamePlateId, buffs [i])
+				spellName = GetSpellInfo(buffs[i])
+				local name, texture, count, debuffType, duration, expirationTime, caster, canStealOrPurge, nameplateShowPersonal, spellId = AuraUtil.FindAuraByName(spellName, self.NamePlateId)
 				if (name) then
 					AddAura (self, auraIndex, auraWidth, auraHeight, name, texture, count, debuffType, duration, expirationTime, caster, canStealOrPurge, nameplateShowPersonal, spellId, true)
 					auraIndex = auraIndex + 1
